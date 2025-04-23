@@ -1,42 +1,48 @@
-Vue.createApp({
+const app = Vue.createApp({
 	data() {
-		return {
-			newMovie: '',
-			movies: [
-				{ title: 'Интерстеллар' },
-				{ title: 'Начало' }
-			]
-		}
+			return {
+					newMovie: '',
+					movies: [
+							{ title: 'Интерстеллар' },
+							{ title: 'Начало' }
+					]
+			}
 	},
 	methods: {
-		addMovie() {
-			if (this.newMovie.trim()) {
-				this.movies.push({ title: this.newMovie });
-				this.newMovie = '';
+			addMovie() {
+					if (this.newMovie.trim()) {
+							this.movies.push({ title: this.newMovie });
+							this.newMovie = '';
+					}
+			},
+			removeMovie(index) {
+					this.movies.splice(index, 1);
 			}
-		},
-		removeMovie(index) {
-			this.movies.splice(index, 1);
-		}
-	},
+	}
+});
 
+// Компонент для отображения списка
+app.component('movie-list', {
+	props: ['movies'],
 	template: `
-<span class="card_sb">
-	<input 
-    type="text" 
-    placeholder="Название фильма"
-    v-model="newMovie"
-  >
-  <button class="add_btn" @click="addMovie">Добавить в список</button>
-</span>
+			<ul class="list">
+			    <transition-group name="fade" tag="ul" class="list">
+					<li v-for="(movie, index) in movies" :key="index">
+							<span class="card_sb">
+									{{ movie.title }}
+									<button 
+											class="remove_btn" 
+											@click="$emit('remove', index)"
+									>
+											Удалить
+									</button>
+							</span>
+					</li>
+					    </transition-group>
 
-  <ul>
-    <li v-for="(movie, index) in movies" :key="index">
-<span class="card_sb">
-      {{ movie.title }}
-      <button class="remove_btn" @click="removeMovie(index)">Удалить</button>
-			</span>
-    </li>
-  </ul>
+			</ul>
 	`
-}).mount('#app');
+});
+
+
+app.mount('#app');
