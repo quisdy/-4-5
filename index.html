@@ -10,9 +10,13 @@
 
 <body>
 	<div id="app">
-    <demo-game></demo-game>
-</div>
+		<div class="card_sb">
+			<input type="text" placeholder="Название фильма" v-model="newMovie">
+			<button class="add_btn" @click="addMovie">Добавить в список</button>
+		</div>
 
+		<movie-list :movies="movies" @remove="removeMovie"></movie-list>
+	</div>
 
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script src="js/main.js"></script>
