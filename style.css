@@ -7,7 +7,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 50%;
-	margin: 10px 31%;
+	margin: 10px auto;
 	background: #fafafa;
 	border: 1px solid silver;
 	border-radius: 20px;
@@ -50,4 +50,29 @@ ul {
 
 ul li {
 	margin-top: 20px;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-enter-active {
+  transition: all 0.4s ease;
+}
+.fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Анимация исчезновения */
+.fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-leave-active {
+  transition: all 0.4s ease;
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
 }
